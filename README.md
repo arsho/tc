@@ -54,6 +54,87 @@ Union: 0.0058 (merge: 0.0014)
 Total: 0.0276
 ```
 
+## CUDA to SYCL Migration
+- In nvidia machine:
+```shell
+cd sycl_implementation
+make clean
+intercept-build make
+c2s -p compile_commands.json --out-root tc_sycl
+cp data_7035.txt tc_sycl
+tar -cvf tc_sycl.tgz tc_sycl
+scp tc_sycl.tgz idc:~/
+```
+- In Intel dev cloud node:
+```shell
+srun --pty bash
+source /opt/intel/oneapi/setvars.sh
+tar -xvf tc_sycl.tgz
+cd tc_sycl
+icpx -fsycl *.cpp
+```
+Error:
+```shell
+kernels.dp.cpp:7:23: error: unknown type name 'Entity'
+void build_hash_table(Entity *hash_table, long int hash_table_row_size,
+                      ^
+kernels.dp.cpp:19:24: error: use of undeclared identifier 'get_position'
+        int position = get_position(key, hash_table_row_size);
+                       ^
+kernels.dp.cpp:34:32: error: unknown type name 'Entity'
+void initialize_result_t_delta(Entity *result, Entity *t_delta,
+                               ^
+kernels.dp.cpp:34:48: error: unknown type name 'Entity'
+void initialize_result_t_delta(Entity *result, Entity *t_delta,
+                                               ^
+kernels.dp.cpp:50:18: error: unknown type name 'Entity'
+void copy_struct(Entity *source, long int source_rows, Entity *destination,
+                 ^
+kernels.dp.cpp:50:56: error: unknown type name 'Entity'
+void copy_struct(Entity *source, long int source_rows, Entity *destination,
+                                                       ^
+kernels.dp.cpp:65:27: error: unknown type name 'Entity'
+void negative_fill_struct(Entity *source, long int source_rows,
+                          ^
+kernels.dp.cpp:80:88: error: unknown type name 'Entity'
+void get_reverse_relation(int *relation, long int relation_rows, int relation_columns, Entity *t_delta,
+                                                                                       ^
+kernels.dp.cpp:96:27: error: unknown type name 'Entity'
+void get_join_result_size(Entity *hash_table, long int hash_table_row_size,
+                          ^
+kernels.dp.cpp:97:27: error: unknown type name 'Entity'
+                          Entity *t_delta, long int relation_rows,
+                          ^
+kernels.dp.cpp:109:24: error: use of undeclared identifier 'get_position'
+        int position = get_position(key, hash_table_row_size);
+                       ^
+kernels.dp.cpp:123:22: error: unknown type name 'Entity'
+void get_join_result(Entity *hash_table, int hash_table_row_size,
+                     ^
+kernels.dp.cpp:124:22: error: unknown type name 'Entity'
+                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result,
+                     ^
+kernels.dp.cpp:124:71: error: unknown type name 'Entity'
+                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result,
+                                                                      ^
+kernels.dp.cpp:134:24: error: use of undeclared identifier 'get_position'
+        int position = get_position(key, hash_table_row_size);
+                       ^
+kernels.dp.cpp:149:30: error: unknown type name 'Entity'
+void get_join_result_size_ar(Entity *hash_table, long int hash_table_row_size,
+                             ^
+kernels.dp.cpp:162:24: error: use of undeclared identifier 'get_position'
+        int position = get_position(key, hash_table_row_size);
+                       ^
+kernels.dp.cpp:176:25: error: unknown type name 'Entity'
+void get_join_result_ar(Entity *hash_table, int hash_table_row_size,
+                        ^
+kernels.dp.cpp:177:68: error: unknown type name 'Entity'
+                     int *t_delta, int relation_rows, int *offset, Entity *join_result,
+                                                                   ^
+fatal error: too many errors emitted, stopping now [-ferror-limit=]
+20 errors generated.
+```
 ## Citation
 We encourage you to cite our work if you have used our work. Use the following BibTeX citation:
 - BibTeX:

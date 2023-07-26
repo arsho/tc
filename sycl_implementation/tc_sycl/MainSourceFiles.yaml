@@ -1,0 +1,1531 @@
+---
+MainSourceFile:  MainSrcFiles_placehold
+Replacements:
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/error_handler.cu'
+    Offset:          0
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/error_handler.cu'
+    Offset:          88
+    Length:          11
+    ReplacementText: 'dpct::err0'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/error_handler.cu'
+    Offset:          159
+    Length:          151
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          0
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          89
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          253
+    Length:          0
+    ReplacementText: ",\n                      const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          274
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          287
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          301
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          372
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          385
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          686
+    Length:          45
+    ReplacementText: 'dpct::atomic_compare_exchange_strong<sycl::access::address_space::generic_space>(&hash_table[position].key, -1, key)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          946
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1103
+    Length:          0
+    ReplacementText: ",\n                       const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1124
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1137
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1151
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1222
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1235
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1476
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1561
+    Length:          0
+    ReplacementText: ",\n                 const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1582
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1595
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1609
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1678
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1691
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1860
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1933
+    Length:          0
+    ReplacementText: ",\n                          const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1954
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1967
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          1981
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2050
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2063
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2198
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2311
+    Length:          0
+    ReplacementText: ",\n                          const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2332
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2345
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2359
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2430
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2443
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2656
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2857
+    Length:          0
+    ReplacementText: ",\n                          const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2878
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2891
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2905
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2976
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          2989
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3518
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3684
+    Length:          0
+    ReplacementText: ",\n                     const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3705
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3718
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3732
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3802
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          3815
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4472
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4673
+    Length:          0
+    ReplacementText: ",\n                          const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4694
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4707
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4721
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4792
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          4805
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5336
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5502
+    Length:          0
+    ReplacementText: ",\n                     const sycl::nd_item<3> &item_ct1"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5523
+    Length:          10
+    ReplacementText: 'item_ct1.get_group(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5536
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5550
+    Length:          11
+    ReplacementText: 'item_ct1.get_local_id(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5620
+    Length:          10
+    ReplacementText: 'item_ct1.get_local_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Offset:          5633
+    Length:          9
+    ReplacementText: 'item_ct1.get_group_range(2)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          0
+    Length:          0
+    ReplacementText: "#include <oneapi/dpl/execution>\n#include <oneapi/dpl/algorithm>\n#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          92
+    Length:          0
+    ReplacementText: "\n#include <dpct/dpl_utils.hpp>\n\n#include <functional>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          93
+    Length:          26
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          119
+    Length:          25
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          144
+    Length:          37
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          181
+    Length:          31
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          212
+    Length:          31
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          243
+    Length:          27
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          270
+    Length:          25
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          295
+    Length:          25
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          320
+    Length:          27
+    ReplacementText: '#include "error_handler.dp.cpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          348
+    Length:          19
+    ReplacementText: '#include "utils.dp.cpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          368
+    Length:          21
+    ReplacementText: '#include "kernels.dp.cpp"'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          629
+    Length:          0
+    ReplacementText: "\n    dpct::device_ext &dev_ct1 = dpct::get_current_device();\n    sycl::queue &q_ct1 = dev_ct1.default_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          1756
+    Length:          43
+    ReplacementText: 'sycl::pow<double>(2, ceil(log(hash_table_rows) / log(2)))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          1816
+    Length:          88
+    ReplacementText: 'DPCT_CHECK_ERROR(relation_host = sycl::malloc_host<int>(relation_rows * relation_columns, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          1921
+    Length:          79
+    ReplacementText: 'DPCT_CHECK_ERROR(relation = sycl::malloc_device<int>(relation_rows * relation_columns, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          2017
+    Length:          59
+    ReplacementText: 'DPCT_CHECK_ERROR(result = sycl::malloc_device<Entity>(result_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          2093
+    Length:          62
+    ReplacementText: 'DPCT_CHECK_ERROR(t_delta = sycl::malloc_device<Entity>(relation_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          2172
+    Length:          67
+    ReplacementText: 'DPCT_CHECK_ERROR(hash_table = sycl::malloc_device<Entity>(hash_table_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          2997
+    Length:          10
+    ReplacementText: q_ct1.memcpy
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3079
+    Length:          39
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3119
+    Length:          0
+    ReplacementText: '.wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3442
+    Length:          87
+    ReplacementText: 'std::fill(oneapi::dpl::execution::make_device_policy(q_ct1), hash_table, hash_table + hash_table_rows, negative_entity)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3732
+    Length:          0
+    ReplacementText: "    /*\n    DPCT1049:0: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n    */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3736
+    Length:          154
+    ReplacementText: "q_ct1.parallel_for(\n      sycl::nd_range<3>(sycl::range<3>(1, 1, grid_size) * sycl::range<3>(1, 1, block_size), sycl::range<3>(1, 1, block_size)), \n      [=](sycl::nd_item<3> item_ct1) {\n        build_hash_table(hash_table, hash_table_rows, relation, relation_rows, relation_columns, item_ct1);\n      });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3890
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          3906
+    Length:          23
+    ReplacementText: 'DPCT_CHECK_ERROR(dev_ct1.queues_wait_and_throw())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4246
+    Length:          0
+    ReplacementText: "    /*\n    DPCT1049:1: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n    */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4250
+    Length:          112
+    ReplacementText: "q_ct1.parallel_for(\n      sycl::nd_range<3>(sycl::range<3>(1, 1, grid_size) * sycl::range<3>(1, 1, block_size), sycl::range<3>(1, 1, block_size)), \n      [=](sycl::nd_item<3> item_ct1) {\n        initialize_result_t_delta(result, t_delta, relation, relation_rows, relation_columns, item_ct1);\n      });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4362
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4378
+    Length:          23
+    ReplacementText: 'DPCT_CHECK_ERROR(dev_ct1.queues_wait_and_throw())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4570
+    Length:          74
+    ReplacementText: 'oneapi::dpl::stable_sort(oneapi::dpl::execution::make_device_policy(q_ct1), result, result + relation_rows, cmp())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4928
+    Length:          18
+    ReplacementText: 'sycl::free(relation, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          4952
+    Length:          27
+    ReplacementText: 'sycl::free(relation_host, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          5551
+    Length:          57
+    ReplacementText: 'DPCT_CHECK_ERROR(offset = sycl::malloc_device<int>(t_delta_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          5925
+    Length:          0
+    ReplacementText: "        /*\n        DPCT1049:2: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n        */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          5933
+    Length:          163
+    ReplacementText: "q_ct1.parallel_for(\n          sycl::nd_range<3>(sycl::range<3>(1, 1, grid_size) * sycl::range<3>(1, 1, block_size), sycl::range<3>(1, 1, block_size)), \n          [=](sycl::nd_item<3> item_ct1) {\n            get_join_result_size(hash_table, hash_table_rows, t_delta, t_delta_rows, offset, item_ct1);\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6096
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6116
+    Length:          23
+    ReplacementText: 'DPCT_CHECK_ERROR(dev_ct1.queues_wait_and_throw())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6380
+    Length:          64
+    ReplacementText: 'std::reducet(oneapi::dpl::execution::make_device_policy(q_ct1), offset, offset + t_delta_rows, 0)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6454
+    Length:          77
+    ReplacementText: 'std::exclusive_scan(oneapi::dpl::execution::make_device_policy(q_ct1), offset, offset + t_delta_rows, offset, (decltype(offset)::value_type)0)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6551
+    Length:          69
+    ReplacementText: 'DPCT_CHECK_ERROR(join_result = sycl::malloc_device<Entity>(join_result_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6944
+    Length:          0
+    ReplacementText: "        /*\n        DPCT1049:3: The work-group size passed to the SYCL kernel may exceed the limit. To get the device limit, query info::device::max_work_group_size. Adjust the work-group size if needed.\n        */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          6952
+    Length:          166
+    ReplacementText: "q_ct1.parallel_for(\n          sycl::nd_range<3>(sycl::range<3>(1, 1, grid_size) * sycl::range<3>(1, 1, block_size), sycl::range<3>(1, 1, block_size)), \n          [=](sycl::nd_item<3> item_ct1) {\n            get_join_result(hash_table, hash_table_rows, t_delta, t_delta_rows, offset, join_result, item_ct1);\n          });"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: true
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          7118
+    Length:          1
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          7138
+    Length:          23
+    ReplacementText: 'DPCT_CHECK_ERROR(dev_ct1.queues_wait_and_throw())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          7501
+    Length:          87
+    ReplacementText: 'oneapi::dpl::stable_sort(oneapi::dpl::execution::make_device_policy(q_ct1), join_result, join_result + join_result_rows, cmp())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          8007
+    Length:          189
+    ReplacementText: 'std::unique(oneapi::dpl::execution::make_device_policy(q_ct1), join_result, join_result + join_result_rows, is_equal())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          8607
+    Length:          17
+    ReplacementText: 'sycl::free(t_delta, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          8936
+    Length:          64
+    ReplacementText: 'DPCT_CHECK_ERROR(t_delta = sycl::malloc_device<Entity>(projection_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          9011
+    Length:          81
+    ReplacementText: 'std::copy(oneapi::dpl::execution::make_device_policy(q_ct1), join_result, join_result + projection_rows, t_delta)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          9494
+    Length:          78
+    ReplacementText: 'DPCT_CHECK_ERROR(concatenated_result = sycl::malloc_device<Entity>(concatenated_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          9714
+    Length:          197
+    ReplacementText: 'std::merge(oneapi::dpl::execution::make_device_policy(q_ct1), result, result + result_rows, join_result, join_result + projection_rows, concatenated_result, cmp())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          10487
+    Length:          257
+    ReplacementText: 'std::unique(oneapi::dpl::execution::make_device_policy(q_ct1), concatenated_result, concatenated_result + concatenated_rows, is_equal())'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          11163
+    Length:          16
+    ReplacementText: 'sycl::free(result, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          11491
+    Length:          72
+    ReplacementText: 'DPCT_CHECK_ERROR(result = sycl::malloc_device<Entity>(deduplicated_result_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          11637
+    Length:          126
+    ReplacementText: 'std::copy(oneapi::dpl::execution::make_device_policy(q_ct1), concatenated_result, concatenated_result + deduplicated_result_rows, result)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12177
+    Length:          21
+    ReplacementText: 'sycl::free(join_result, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12208
+    Length:          16
+    ReplacementText: 'sycl::free(offset, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12234
+    Length:          29
+    ReplacementText: 'sycl::free(concatenated_result, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12754
+    Length:          68
+    ReplacementText: 'DPCT_CHECK_ERROR(result_host = sycl::malloc_host<Entity>(result_rows, q_ct1))'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12829
+    Length:          10
+    ReplacementText: q_ct1.memcpy
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12889
+    Length:          39
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          12929
+    Length:          0
+    ReplacementText: '.wait()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          13183
+    Length:          17
+    ReplacementText: 'sycl::free(t_delta, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          13206
+    Length:          16
+    ReplacementText: 'sycl::free(result, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          13228
+    Length:          20
+    ReplacementText: 'sycl::free(hash_table, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          13254
+    Length:          25
+    ReplacementText: 'sycl::free(result_host, q_ct1)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          15348
+    Length:          25
+    ReplacementText: 'device_id = dpct::dev_mgr::instance().current_device_id()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Offset:          15449
+    Length:          80
+    ReplacementText: 'number_of_sm = dpct::dev_mgr::instance().get_device(device_id).get_max_compute_units()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          0
+    Length:          0
+    ReplacementText: "#include <sycl/sycl.hpp>\n#include <dpct/dpct.hpp>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          55
+    Length:          0
+    ReplacementText: "\n#include <chrono>\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          629
+    Length:          11
+    ReplacementText: 'dpct::event_ptr'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          647
+    Length:          0
+    ReplacementText: "\n    std::chrono::time_point<std::chrono::steady_clock> start_ct1;"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          652
+    Length:          11
+    ReplacementText: 'dpct::event_ptr'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          669
+    Length:          0
+    ReplacementText: "\n    std::chrono::time_point<std::chrono::steady_clock> stop_ct1;"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          699
+    Length:          23
+    ReplacementText: 'start = new sycl::event()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          732
+    Length:          22
+    ReplacementText: 'stop = new sycl::event()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          792
+    Length:          23
+    ReplacementText: 'dpct::destroy_event(start)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          825
+    Length:          22
+    ReplacementText: 'dpct::destroy_event(stop)'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          880
+    Length:          0
+    ReplacementText: "\n    dpct::device_ext &dev_ct1 = dpct::get_current_device();\n    sycl::queue &q_ct1 = dev_ct1.default_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          881
+    Length:          0
+    ReplacementText: "        /*\n        DPCT1012:5: Detected kernel execution time measurement pattern and generated an initial code for time measurements in SYCL. You can change the way time is measured depending on your goals.\n        */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          889
+    Length:          25
+    ReplacementText: "start_ct1 = std::chrono::steady_clock::now();\n        *start = q_ct1.ext_oneapi_submit_barrier()"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          946
+    Length:          0
+    ReplacementText: "\n    dpct::device_ext &dev_ct1 = dpct::get_current_device();\n    sycl::queue &q_ct1 = dev_ct1.default_queue();"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          947
+    Length:          0
+    ReplacementText: "        /*\n        DPCT1012:6: Detected kernel execution time measurement pattern and generated an initial code for time measurements in SYCL. You can change the way time is measured depending on your goals.\n        */\n"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          955
+    Length:          24
+    ReplacementText: "stop_ct1 = std::chrono::steady_clock::now();\n        *stop = q_ct1.ext_oneapi_submit_barrier()"
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1048
+    Length:          26
+    ReplacementText: 'stop->wait_and_throw()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1084
+    Length:          43
+    ReplacementText: 'elapsed = std::chrono::duration<float, std::milli>(stop_ct1 - start_ct1).count()'
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1212
+    Length:          9
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1221
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1429
+    Length:          9
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1438
+    Length:          10
+    ReplacementText: ''
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+  - FilePath:        '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Offset:          1829
+    Length:          11
+    ReplacementText: 'SYCL_EXTERNAL '
+    ConstantFlag:    ''
+    ConstantOffset:  0
+    InitStr:         ''
+    NewHostVarName:  ''
+    BlockLevelFormatFlag: false
+MainSourceFilesDigest:
+  - MainSourceFile:  '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/error_handler.cu'
+    Digest:          3a57f0e43c593f94be53cdfb12d2ccf3
+  - MainSourceFile:  '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/kernels.cu'
+    Digest:          619c13243dcda277892f6cb5bf5f1d6f
+  - MainSourceFile:  '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu'
+    Digest:          28ee893dda6de85e0b24dda3262a24ea
+  - MainSourceFile:  '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/utils.cu'
+    Digest:          4ddb76d87e01424094cba72692e0368d
+DpctVersion:     17.0.0
+MainHelperFileName: ''
+USMLevel:        ''
+FeatureMap:      {}
+CompileTargets:  {}
+OptionMap:
+  AnalysisScopePath:
+    Value:           '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation'
+    Specified:       false
+  AsyncHandler:
+    Value:           'false'
+    Specified:       false
+  CommentsEnabled:
+    Value:           'false'
+    Specified:       false
+  CompilationsDir:
+    Value:           '/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation'
+    Specified:       true
+  CtadEnabled:
+    Value:           'false'
+    Specified:       false
+  EnablepProfiling:
+    Value:           'false'
+    Specified:       false
+  ExperimentalFlag:
+    Value:           '0'
+    Specified:       false
+  ExplicitClNamespace:
+    Value:           'false'
+    Specified:       false
+  ExplicitNamespace:
+    Value:           '20'
+    Specified:       false
+  ExtensionDDFlag:
+    Value:           '0'
+    Specified:       false
+  ExtensionDEFlag:
+    Value:           '4294967295'
+    Specified:       false
+  NDRangeDim:
+    Value:           '3'
+    Specified:       false
+  NoDRYPattern:
+    Value:           'false'
+    Specified:       false
+  OptimizeMigration:
+    Value:           'false'
+    Specified:       false
+  ProcessAll:
+    Value:           'false'
+    Specified:       false
+  RuleFile:
+    Value:           ''
+    Specified:       false
+  SyclNamedLambda:
+    Value:           'false'
+    Specified:       false
+  UsmLevel:
+    Value:           '1'
+    Specified:       false
+...
