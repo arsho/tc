@@ -1,7 +1,5 @@
 ## Transitive Closure Computation
-This repo contains the code, data, and instructions to compute transitive closure in CUDA and SYCL.
-
-![alt comparison](screenshots/comparison.png)
+This repo contains the code, data, and instructions to compute transitive closure in different parallel programming models.
 
 
 ## Folder structure
@@ -55,6 +53,25 @@ Memory clear: 0.0017
 Union: 0.0058 (merge: 0.0014)
 Total: 0.0276
 ```
+
+## Citation
+We encourage you to cite our work if you have used our work. Use the following BibTeX citation:
+- BibTeX:
+```
+@inproceedings {288749,
+    author = {Ahmedur Rahman Shovon and Thomas Gilray and Kristopher Micinski and Sidharth Kumar},
+    title = {Towards Iterative Relational Algebra on the {GPU}},
+    booktitle = {2023 USENIX Annual Technical Conference (USENIX ATC 23)},
+    year = {2023},
+    isbn = {978-1-939133-35-9},
+    address = {Boston, MA},
+    pages = {1009--1016},
+    url = {https://www.usenix.org/conference/atc23/presentation/shovon},
+    publisher = {USENIX Association},
+    month = jul,
+}
+```
+
 ### References
 - [CUDA — Memory Model blog](https://medium.com/analytics-vidhya/cuda-memory-model-823f02cef0bf)
 - [CUDA - Pinned memory](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/)
