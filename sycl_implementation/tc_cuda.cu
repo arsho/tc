@@ -3,20 +3,437 @@
 #include <chrono>
 #include <math.h>
 #include <iomanip>
-#include <thrust/count.h>
 #include <thrust/sort.h>
 #include <thrust/execution_policy.h>
 #include <thrust/functional.h>
-#include <thrust/device_ptr.h>
 #include <thrust/unique.h>
 #include <thrust/copy.h>
 #include <thrust/fill.h>
-#include "error_handler.cu"
-#include "utils.cu"
-#include "kernels.cu"
-
 
 using namespace std;
+#define checkCuda(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+
+inline void gpuAssert(cudaError_t code, const char *file, int line, bool abort = true) {
+    if (code != cudaSuccess) {
+        fprintf(stderr, "GPUassert: %s %s %d\n", cudaGetErrorString(code), file, line);
+        if (abort) exit(code);
+    }
+}
+
+struct Entity {
+    int key;
+    int value;
+};
+
+struct Output {
+    int block_size;
+    int grid_size;
+    long int input_rows;
+    long int hashtable_rows;
+    double load_factor;
+    double initialization_time;
+    double memory_clear_time;
+    double read_time;
+    double reverse_time;
+    double hashtable_build_time;
+    long int hashtable_build_rate;
+    double join_time;
+    double projection_time;
+    double deduplication_time;
+    double union_time;
+    double total_time;
+    const char *dataset_name;
+} output;
+
+struct KernelTimer {
+    cudaEvent_t start;
+    cudaEvent_t stop;
+
+    KernelTimer() {
+        cudaEventCreate(&start);
+        cudaEventCreate(&stop);
+    }
+
+    ~KernelTimer() {
+        cudaEventDestroy(start);
+        cudaEventDestroy(stop);
+    }
+
+    void start_timer() {
+        cudaEventRecord(start, 0);
+    }
+
+    void stop_timer() {
+        cudaEventRecord(stop, 0);
+    }
+
+    float get_spent_time() {
+        float elapsed;
+        cudaEventSynchronize(stop);
+        cudaEventElapsedTime(&elapsed, start, stop);
+        elapsed /= 1000.0;
+        return elapsed;
+    }
+};
+
+struct is_equal {
+    __host__ __device__
+    bool operator()(const Entity &lhs, const Entity &rhs) {
+        if ((lhs.key == rhs.key) && (lhs.value == rhs.value))
+            return true;
+        return false;
+    }
+};
+
+
+struct cmp {
+    __host__ __device__
+    bool operator()(const Entity &lhs, const Entity &rhs) {
+        if (lhs.key < rhs.key)
+            return true;
+        else if (lhs.key > rhs.key)
+            return false;
+        else {
+            if (lhs.value < rhs.value)
+                return true;
+            else if (lhs.value > rhs.value)
+                return false;
+            return true;
+        }
+    }
+};
+
+__device__ int get_position(int key, int hash_table_row_size) {
+    key ^= key >> 16;
+    key *= 0x85ebca6b;
+    key ^= key >> 13;
+    key *= 0xc2b2ae35;
+    key ^= key >> 16;
+    return key & (hash_table_row_size - 1);
+}
+
+void show_time_spent(string message,
+                     chrono::high_resolution_clock::time_point time_point_begin,
+                     chrono::high_resolution_clock::time_point time_point_end) {
+    chrono::duration<double> time_span = time_point_end - time_point_begin;
+    cout << message << ": " << time_span.count() << " seconds" << endl;
+}
+
+double get_time_spent(string message,
+                      chrono::high_resolution_clock::time_point time_point_begin,
+                      chrono::high_resolution_clock::time_point time_point_end) {
+    chrono::duration<double> time_span = time_point_end - time_point_begin;
+    if (message != "")
+        cout << message << ": " << time_span.count() << " seconds" << endl;
+    return time_span.count();
+}
+
+void show_relation(int *data, int total_rows,
+                   int total_columns, const char *relation_name,
+                   int visible_rows, int skip_zero) {
+    int count = 0;
+    cout << "Relation name: " << relation_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < total_rows; i++) {
+        int skip = 0;
+        for (int j = 0; j < total_columns; j++) {
+            if ((skip_zero == 1) && (data[(i * total_columns) + j] == 0)) {
+                skip = 1;
+                continue;
+            }
+            cout << data[(i * total_columns) + j] << " ";
+        }
+        if (skip == 1)
+            continue;
+        cout << endl;
+        count++;
+        if (count == visible_rows) {
+            cout << "Result cropped at row " << count << "\n" << endl;
+            return;
+        }
+
+    }
+    cout << "Result counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+int *get_relation_from_file(const char *file_path, int total_rows, int total_columns, char separator) {
+    int *data = (int *) malloc(total_rows * total_columns * sizeof(int));
+    FILE *data_file = fopen(file_path, "r");
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            if (j != (total_columns - 1)) {
+                fscanf(data_file, "%d%c", &data[(i * total_columns) + j], &separator);
+            } else {
+                fscanf(data_file, "%d", &data[(i * total_columns) + j]);
+            }
+        }
+    }
+    return data;
+}
+
+void get_relation_from_file_gpu(int *data, const char *file_path, int total_rows, int total_columns, char separator) {
+    FILE *data_file = fopen(file_path, "r");
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            if (j != (total_columns - 1)) {
+                fscanf(data_file, "%d%c", &data[(i * total_columns) + j], &separator);
+            } else {
+                fscanf(data_file, "%d", &data[(i * total_columns) + j]);
+            }
+        }
+    }
+}
+
+
+void get_random_relation(int *data, int total_rows, int total_columns) {
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            data[(i * total_columns) + j] = (rand() % (32767 - 0 + 1)) + 0;
+        }
+    }
+}
+
+void get_string_relation(int *data, int total_rows, int total_columns) {
+    int x = 1, y = 2;
+    for (int i = 0; i < total_rows; i++) {
+        data[(i * total_columns) + 0] = x++;
+        data[(i * total_columns) + 1] = y++;
+    }
+}
+
+void get_reverse_relation_gpu(int *reverse_data, int *data, int total_rows, int total_columns) {
+    for (int i = 0; i < total_rows; i++) {
+        int pos = total_columns - 1;
+        for (int j = 0; j < total_columns; j++) {
+            reverse_data[(i * total_columns) + j] = data[(i * total_columns) + pos];
+            pos--;
+        }
+    }
+}
+
+
+void show_hash_table(Entity *hash_table, long int hash_table_row_size, const char *hash_table_name) {
+    int count = 0;
+    cout << "Hashtable name: " << hash_table_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < hash_table_row_size; i++) {
+        if (hash_table[i].key != -1) {
+            cout << hash_table[i].key << " " << hash_table[i].value << endl;
+            count++;
+        }
+    }
+    cout << "Row counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+void show_entity_array(Entity *data, int data_rows, const char *array_name) {
+    long int count = 0;
+    cout << "Entity name: " << array_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < data_rows; i++) {
+        if (data[i].key != -1) {
+            cout << data[i].key << " " << data[i].value << endl;
+            count++;
+        }
+    }
+    cout << "Row counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+long int get_row_size(const char *data_path) {
+    long int row_size = 0;
+    int base = 1;
+    for (int i = strlen(data_path) - 1; i >= 0; i--) {
+        if (isdigit(data_path[i])) {
+            int digit = (int) data_path[i] - '0';
+            row_size += base * digit;
+            base *= 10;
+        }
+    }
+    return row_size;
+}
+
+/*
+ * Method that returns position in the hashtable for a key using Murmur3 hash
+ * */
+
+
+__global__
+void build_hash_table(Entity *hash_table, long int hash_table_row_size,
+                      int *relation, long int relation_rows, int relation_columns) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = relation[(i * relation_columns) + 0];
+        int value = relation[(i * relation_columns) + 1];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            int existing_key = atomicCAS(&hash_table[position].key, -1, key);
+            if (existing_key == -1) {
+                hash_table[position].value = value;
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
+
+__global__
+void initialize_result_t_delta(Entity *result, Entity *t_delta,
+                               int *relation, long int relation_rows, int relation_columns) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < relation_rows; i += stride) {
+        t_delta[i].key = result[i].key = relation[(i * relation_columns) + 0];
+        t_delta[i].value = result[i].value = relation[(i * relation_columns) + 1];
+    }
+}
+
+__global__
+void copy_struct(Entity *source, long int source_rows, Entity *destination) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= source_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < source_rows; i += stride) {
+        destination[i].key = source[i].key;
+        destination[i].value = source[i].value;
+    }
+}
+
+__global__
+void negative_fill_struct(Entity *source, long int source_rows) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= source_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < source_rows; i += stride) {
+        source[i].key = -1;
+        source[i].value = -1;
+    }
+}
+
+__global__
+void get_reverse_relation(int *relation, long int relation_rows, int relation_columns, Entity *t_delta) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (long int i = index; i < relation_rows; i += stride) {
+        t_delta[i].key = relation[(i * relation_columns) + 0];
+        t_delta[i].value = relation[(i * relation_columns) + 1];
+    }
+}
+
+
+__global__
+void get_join_result_size(Entity *hash_table, long int hash_table_row_size,
+                          Entity *t_delta, long int relation_rows,
+                          int *join_result_size) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[i].value;
+        int current_size = 0;
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                current_size++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+        join_result_size[i] = current_size;
+    }
+}
+
+__global__
+void get_join_result(Entity *hash_table, int hash_table_row_size,
+                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+    int stride = blockDim.x * gridDim.x;
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[i].value;
+        int value = t_delta[i].key;
+        int start_index = offset[i];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                join_result[start_index].key = value;
+                join_result[start_index].value = hash_table[position].value;
+                start_index++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
+
+__global__
+void get_join_result_size_ar(Entity *hash_table, long int hash_table_row_size,
+                             int *t_delta, long int relation_rows,
+                             int *join_result_size) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+
+    int stride = blockDim.x * gridDim.x;
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[(i * 2) + 1];
+        int current_size = 0;
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                current_size++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+        join_result_size[i] = current_size;
+    }
+}
+
+__global__
+void get_join_result_ar(Entity *hash_table, int hash_table_row_size,
+                        int *t_delta, int relation_rows, int *offset, Entity *join_result) {
+    int index = (blockIdx.x * blockDim.x) + threadIdx.x;
+    if (index >= relation_rows) return;
+    int stride = blockDim.x * gridDim.x;
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[(i * 2) + 1];
+        int value = t_delta[i * 2];
+        int start_index = offset[i];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                join_result[start_index].key = value;
+                join_result[start_index].value = hash_table[position].value;
+                start_index++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
+
 
 void gpu_tc(const char *data_path, char separator,
             long int relation_rows, double load_factor,

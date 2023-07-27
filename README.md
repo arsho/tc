@@ -55,6 +55,18 @@ Total: 0.0276
 ```
 
 ## CUDA to SYCL Migration
+- Install Syclomatic:
+```shell
+cd ~/
+mkdir syclomatic
+cd syclomatic
+wget https://github.com/oneapi-src/SYCLomatic/releases/download/20230725/linux_release.tgz
+tar -xvf linux_release.tgz
+cd bin
+pwd
+# Add the following line to .zshrc
+export PATH="/home/arsho/syclomatic/bin:$PATH"
+```
 - In nvidia machine:
 ```shell
 cd sycl_implementation
@@ -75,65 +87,25 @@ icpx -fsycl *.cpp
 ```
 Error:
 ```shell
-kernels.dp.cpp:7:23: error: unknown type name 'Entity'
-void build_hash_table(Entity *hash_table, long int hash_table_row_size,
-                      ^
-kernels.dp.cpp:19:24: error: use of undeclared identifier 'get_position'
-        int position = get_position(key, hash_table_row_size);
-                       ^
-kernels.dp.cpp:34:32: error: unknown type name 'Entity'
-void initialize_result_t_delta(Entity *result, Entity *t_delta,
-                               ^
-kernels.dp.cpp:34:48: error: unknown type name 'Entity'
-void initialize_result_t_delta(Entity *result, Entity *t_delta,
-                                               ^
-kernels.dp.cpp:50:18: error: unknown type name 'Entity'
-void copy_struct(Entity *source, long int source_rows, Entity *destination,
-                 ^
-kernels.dp.cpp:50:56: error: unknown type name 'Entity'
-void copy_struct(Entity *source, long int source_rows, Entity *destination,
-                                                       ^
-kernels.dp.cpp:65:27: error: unknown type name 'Entity'
-void negative_fill_struct(Entity *source, long int source_rows,
-                          ^
-kernels.dp.cpp:80:88: error: unknown type name 'Entity'
-void get_reverse_relation(int *relation, long int relation_rows, int relation_columns, Entity *t_delta,
-                                                                                       ^
-kernels.dp.cpp:96:27: error: unknown type name 'Entity'
-void get_join_result_size(Entity *hash_table, long int hash_table_row_size,
-                          ^
-kernels.dp.cpp:97:27: error: unknown type name 'Entity'
-                          Entity *t_delta, long int relation_rows,
-                          ^
-kernels.dp.cpp:109:24: error: use of undeclared identifier 'get_position'
-        int position = get_position(key, hash_table_row_size);
-                       ^
-kernels.dp.cpp:123:22: error: unknown type name 'Entity'
-void get_join_result(Entity *hash_table, int hash_table_row_size,
-                     ^
-kernels.dp.cpp:124:22: error: unknown type name 'Entity'
-                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result,
-                     ^
-kernels.dp.cpp:124:71: error: unknown type name 'Entity'
-                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result,
-                                                                      ^
-kernels.dp.cpp:134:24: error: use of undeclared identifier 'get_position'
-        int position = get_position(key, hash_table_row_size);
-                       ^
-kernels.dp.cpp:149:30: error: unknown type name 'Entity'
-void get_join_result_size_ar(Entity *hash_table, long int hash_table_row_size,
+u107416@idc-beta-batch-pvc-node-03:~$ icpx -fsycl tc_cuda.dp.cpp 
+tc_cuda.dp.cpp:648:18: error: no member named 'reducet' in namespace 'std'
+            std::reducet(oneapi::dpl::execution::make_device_policy(q_ct1),
+            ~~~~~^
+tc_cuda.dp.cpp:652:30: error: 'decltype(offset)' (aka 'int *') is not a class, namespace, or enumeration
+                            (decltype(offset)::value_type)0);
                              ^
-kernels.dp.cpp:162:24: error: use of undeclared identifier 'get_position'
-        int position = get_position(key, hash_table_row_size);
-                       ^
-kernels.dp.cpp:176:25: error: unknown type name 'Entity'
-void get_join_result_ar(Entity *hash_table, int hash_table_row_size,
-                        ^
-kernels.dp.cpp:177:68: error: unknown type name 'Entity'
-                     int *t_delta, int relation_rows, int *offset, Entity *join_result,
-                                                                   ^
-fatal error: too many errors emitted, stopping now [-ferror-limit=]
-20 errors generated.
+In file included from tc_cuda.dp.cpp:1:
+In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/execution:65:
+In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/pstl/algorithm_impl.h:24:
+In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/pstl/algorithm_fwd.h:20:
+In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/pstl/iterator_defs.h:21:
+/opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/pstl/utils.h:110:17: error: no matching function for call to object of type 'const is_equal'
+        return !_M_pred(::std::forward<_Args>(__args)...);
+
+```
+- Example of converting a single CUDA file:
+```shell
+c2s vectoradd.cu --gen-helper-function --out-root sycl_vector_add
 ```
 ## Citation
 We encourage you to cite our work if you have used our work. Use the following BibTeX citation:
@@ -154,6 +126,9 @@ We encourage you to cite our work if you have used our work. Use the following B
 ```
 
 ### References
-- [CUDA — Memory Model blog](https://medium.com/analytics-vidhya/cuda-memory-model-823f02cef0bf)
-- [CUDA - Pinned memory](https://developer.nvidia.com/blog/how-optimize-data-transfers-cuda-cc/)
-- [Stanford Large Network Dataset Collection](https://snap.stanford.edu/data/index.html)
+- [SYCL Migration - Sorting Networks](https://github.com/oneapi-src/oneAPI-samples/blob/master/DirectProgramming/C%2B%2BSYCL/Jupyter/cuda-to-sycl-migration-training/02_SYCL_Migration_SortingNetworks/02_SYCL_Migration_SortingNetworks.ipynb)
+- [SYCL supported Thrust API](https://oneapi-src.github.io/SYCLomatic/dev_guide/api-mapping-status.html#thrust-api)
+- [SYCL in IDC](https://github.com/bjodom/idc#an-example-script)
+- [Intel Dev Cloud](https://scheduler.cloud.intel.com/#/systems)
+- [Intel One API Samples](https://github.com/oneapi-src/oneAPI-samples/tree/master)
+- [Discord channel](https://discord.com/channels/579789537866154054/1126249130726019143)

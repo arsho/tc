@@ -11,11 +11,467 @@
 
 #include <functional>
 
-#include "error_handler.dp.cpp"
-#include "utils.dp.cpp"
-#include "kernels.dp.cpp"
+#include <chrono>
 
 using namespace std;
+#define checkCuda(ans) { gpuAssert((ans), __FILE__, __LINE__); }
+
+inline void gpuAssert(dpct::err0 code, const char *file, int line,
+                      bool abort = true) {
+}
+
+struct Entity {
+    int key;
+    int value;
+};
+
+struct Output {
+    int block_size;
+    int grid_size;
+    long int input_rows;
+    long int hashtable_rows;
+    double load_factor;
+    double initialization_time;
+    double memory_clear_time;
+    double read_time;
+    double reverse_time;
+    double hashtable_build_time;
+    long int hashtable_build_rate;
+    double join_time;
+    double projection_time;
+    double deduplication_time;
+    double union_time;
+    double total_time;
+    const char *dataset_name;
+} output;
+
+struct KernelTimer {
+    dpct::event_ptr start;
+    std::chrono::time_point<std::chrono::steady_clock> start_ct1;
+    dpct::event_ptr stop;
+    std::chrono::time_point<std::chrono::steady_clock> stop_ct1;
+
+    KernelTimer() {
+        start = new sycl::event();
+        stop = new sycl::event();
+    }
+
+    ~KernelTimer() {
+        dpct::destroy_event(start);
+        dpct::destroy_event(stop);
+    }
+
+    void start_timer() {
+    dpct::device_ext &dev_ct1 = dpct::get_current_device();
+    sycl::queue &q_ct1 = dev_ct1.default_queue();
+        /*
+        DPCT1012:5: Detected kernel execution time measurement pattern and
+        generated an initial code for time measurements in SYCL. You can change
+        the way time is measured depending on your goals.
+        */
+        start_ct1 = std::chrono::steady_clock::now();
+        *start = q_ct1.ext_oneapi_submit_barrier();
+    }
+
+    void stop_timer() {
+    dpct::device_ext &dev_ct1 = dpct::get_current_device();
+    sycl::queue &q_ct1 = dev_ct1.default_queue();
+        /*
+        DPCT1012:6: Detected kernel execution time measurement pattern and
+        generated an initial code for time measurements in SYCL. You can change
+        the way time is measured depending on your goals.
+        */
+        stop_ct1 = std::chrono::steady_clock::now();
+        *stop = q_ct1.ext_oneapi_submit_barrier();
+    }
+
+    float get_spent_time() {
+        float elapsed;
+        stop->wait_and_throw();
+        elapsed = std::chrono::duration<float, std::milli>(stop_ct1 - start_ct1)
+                      .count();
+        elapsed /= 1000.0;
+        return elapsed;
+    }
+};
+
+struct is_equal {
+    
+    bool operator()(const Entity &lhs, const Entity &rhs) {
+        if ((lhs.key == rhs.key) && (lhs.value == rhs.value))
+            return true;
+        return false;
+    }
+};
+
+
+struct cmp {
+    
+    bool operator()(const Entity &lhs, const Entity &rhs) {
+        if (lhs.key < rhs.key)
+            return true;
+        else if (lhs.key > rhs.key)
+            return false;
+        else {
+            if (lhs.value < rhs.value)
+                return true;
+            else if (lhs.value > rhs.value)
+                return false;
+            return true;
+        }
+    }
+};
+
+int get_position(int key, int hash_table_row_size) {
+    key ^= key >> 16;
+    key *= 0x85ebca6b;
+    key ^= key >> 13;
+    key *= 0xc2b2ae35;
+    key ^= key >> 16;
+    return key & (hash_table_row_size - 1);
+}
+
+void show_time_spent(string message,
+                     chrono::high_resolution_clock::time_point time_point_begin,
+                     chrono::high_resolution_clock::time_point time_point_end) {
+    chrono::duration<double> time_span = time_point_end - time_point_begin;
+    cout << message << ": " << time_span.count() << " seconds" << endl;
+}
+
+double get_time_spent(string message,
+                      chrono::high_resolution_clock::time_point time_point_begin,
+                      chrono::high_resolution_clock::time_point time_point_end) {
+    chrono::duration<double> time_span = time_point_end - time_point_begin;
+    if (message != "")
+        cout << message << ": " << time_span.count() << " seconds" << endl;
+    return time_span.count();
+}
+
+void show_relation(int *data, int total_rows,
+                   int total_columns, const char *relation_name,
+                   int visible_rows, int skip_zero) {
+    int count = 0;
+    cout << "Relation name: " << relation_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < total_rows; i++) {
+        int skip = 0;
+        for (int j = 0; j < total_columns; j++) {
+            if ((skip_zero == 1) && (data[(i * total_columns) + j] == 0)) {
+                skip = 1;
+                continue;
+            }
+            cout << data[(i * total_columns) + j] << " ";
+        }
+        if (skip == 1)
+            continue;
+        cout << endl;
+        count++;
+        if (count == visible_rows) {
+            cout << "Result cropped at row " << count << "\n" << endl;
+            return;
+        }
+
+    }
+    cout << "Result counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+int *get_relation_from_file(const char *file_path, int total_rows, int total_columns, char separator) {
+    int *data = (int *) malloc(total_rows * total_columns * sizeof(int));
+    FILE *data_file = fopen(file_path, "r");
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            if (j != (total_columns - 1)) {
+                fscanf(data_file, "%d%c", &data[(i * total_columns) + j], &separator);
+            } else {
+                fscanf(data_file, "%d", &data[(i * total_columns) + j]);
+            }
+        }
+    }
+    return data;
+}
+
+void get_relation_from_file_gpu(int *data, const char *file_path, int total_rows, int total_columns, char separator) {
+    FILE *data_file = fopen(file_path, "r");
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            if (j != (total_columns - 1)) {
+                fscanf(data_file, "%d%c", &data[(i * total_columns) + j], &separator);
+            } else {
+                fscanf(data_file, "%d", &data[(i * total_columns) + j]);
+            }
+        }
+    }
+}
+
+
+void get_random_relation(int *data, int total_rows, int total_columns) {
+    for (int i = 0; i < total_rows; i++) {
+        for (int j = 0; j < total_columns; j++) {
+            data[(i * total_columns) + j] = (rand() % (32767 - 0 + 1)) + 0;
+        }
+    }
+}
+
+void get_string_relation(int *data, int total_rows, int total_columns) {
+    int x = 1, y = 2;
+    for (int i = 0; i < total_rows; i++) {
+        data[(i * total_columns) + 0] = x++;
+        data[(i * total_columns) + 1] = y++;
+    }
+}
+
+void get_reverse_relation_gpu(int *reverse_data, int *data, int total_rows, int total_columns) {
+    for (int i = 0; i < total_rows; i++) {
+        int pos = total_columns - 1;
+        for (int j = 0; j < total_columns; j++) {
+            reverse_data[(i * total_columns) + j] = data[(i * total_columns) + pos];
+            pos--;
+        }
+    }
+}
+
+
+void show_hash_table(Entity *hash_table, long int hash_table_row_size, const char *hash_table_name) {
+    int count = 0;
+    cout << "Hashtable name: " << hash_table_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < hash_table_row_size; i++) {
+        if (hash_table[i].key != -1) {
+            cout << hash_table[i].key << " " << hash_table[i].value << endl;
+            count++;
+        }
+    }
+    cout << "Row counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+void show_entity_array(Entity *data, int data_rows, const char *array_name) {
+    long int count = 0;
+    cout << "Entity name: " << array_name << endl;
+    cout << "===================================" << endl;
+    for (int i = 0; i < data_rows; i++) {
+        if (data[i].key != -1) {
+            cout << data[i].key << " " << data[i].value << endl;
+            count++;
+        }
+    }
+    cout << "Row counts " << count << "\n" << endl;
+    cout << "" << endl;
+}
+
+long int get_row_size(const char *data_path) {
+    long int row_size = 0;
+    int base = 1;
+    for (int i = strlen(data_path) - 1; i >= 0; i--) {
+        if (isdigit(data_path[i])) {
+            int digit = (int) data_path[i] - '0';
+            row_size += base * digit;
+            base *= 10;
+        }
+    }
+    return row_size;
+}
+
+/*
+ * Method that returns position in the hashtable for a key using Murmur3 hash
+ * */
+
+
+
+void build_hash_table(Entity *hash_table, long int hash_table_row_size,
+                      int *relation, long int relation_rows, int relation_columns,
+                      const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = relation[(i * relation_columns) + 0];
+        int value = relation[(i * relation_columns) + 1];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            int existing_key = dpct::atomic_compare_exchange_strong<
+                sycl::access::address_space::generic_space>(
+                &hash_table[position].key, -1, key);
+            if (existing_key == -1) {
+                hash_table[position].value = value;
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
+
+
+void initialize_result_t_delta(Entity *result, Entity *t_delta,
+                               int *relation, long int relation_rows, int relation_columns,
+                               const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < relation_rows; i += stride) {
+        t_delta[i].key = result[i].key = relation[(i * relation_columns) + 0];
+        t_delta[i].value = result[i].value = relation[(i * relation_columns) + 1];
+    }
+}
+
+
+void copy_struct(Entity *source, long int source_rows, Entity *destination,
+                 const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= source_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < source_rows; i += stride) {
+        destination[i].key = source[i].key;
+        destination[i].value = source[i].value;
+    }
+}
+
+
+void negative_fill_struct(Entity *source, long int source_rows,
+                          const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= source_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < source_rows; i += stride) {
+        source[i].key = -1;
+        source[i].value = -1;
+    }
+}
+
+
+void get_reverse_relation(int *relation, long int relation_rows, int relation_columns, Entity *t_delta,
+                          const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (long int i = index; i < relation_rows; i += stride) {
+        t_delta[i].key = relation[(i * relation_columns) + 0];
+        t_delta[i].value = relation[(i * relation_columns) + 1];
+    }
+}
+
+
+
+void get_join_result_size(Entity *hash_table, long int hash_table_row_size,
+                          Entity *t_delta, long int relation_rows,
+                          int *join_result_size,
+                          const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[i].value;
+        int current_size = 0;
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                current_size++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+        join_result_size[i] = current_size;
+    }
+}
+
+
+void get_join_result(Entity *hash_table, int hash_table_row_size,
+                     Entity *t_delta, int relation_rows, int *offset, Entity *join_result,
+                     const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[i].value;
+        int value = t_delta[i].key;
+        int start_index = offset[i];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                join_result[start_index].key = value;
+                join_result[start_index].value = hash_table[position].value;
+                start_index++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
+
+
+void get_join_result_size_ar(Entity *hash_table, long int hash_table_row_size,
+                             int *t_delta, long int relation_rows,
+                             int *join_result_size,
+                             const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[(i * 2) + 1];
+        int current_size = 0;
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                current_size++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+        join_result_size[i] = current_size;
+    }
+}
+
+
+void get_join_result_ar(Entity *hash_table, int hash_table_row_size,
+                        int *t_delta, int relation_rows, int *offset, Entity *join_result,
+                        const sycl::nd_item<3> &item_ct1) {
+    int index = (item_ct1.get_group(2) * item_ct1.get_local_range(2)) +
+                item_ct1.get_local_id(2);
+    if (index >= relation_rows) return;
+    int stride = item_ct1.get_local_range(2) * item_ct1.get_group_range(2);
+    for (int i = index; i < relation_rows; i += stride) {
+        int key = t_delta[(i * 2) + 1];
+        int value = t_delta[i * 2];
+        int start_index = offset[i];
+        int position = get_position(key, hash_table_row_size);
+        while (true) {
+            if (hash_table[position].key == key) {
+                join_result[start_index].key = value;
+                join_result[start_index].value = hash_table[position].value;
+                start_index++;
+            } else if (hash_table[position].key == -1) {
+                break;
+            }
+            position = (position + 1) & (hash_table_row_size - 1);
+        }
+    }
+}
 
 void gpu_tc(const char *data_path, char separator, long int relation_rows,
             double load_factor, int preferred_grid_size,

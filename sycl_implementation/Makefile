@@ -11,5 +11,8 @@ run: build test
 
 clean:
 	rm -f $(TARGET).out
+	rm -f *.json
+	rm -f *.tgz
+	rm -rf tc_sycl
 
 .PHONY.: build
