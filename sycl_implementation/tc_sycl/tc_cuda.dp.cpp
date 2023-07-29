@@ -645,7 +645,7 @@ void gpu_tc(const char *data_path, char separator, long int relation_rows,
         output.join_time += spent_time;
         time_point_begin = chrono::high_resolution_clock::now();
         join_result_rows =
-            std::reducet(oneapi::dpl::execution::make_device_policy(q_ct1),
+            std::reduce(oneapi::dpl::execution::make_device_policy(q_ct1),
                          offset, offset + t_delta_rows, 0);
         std::exclusive_scan(oneapi::dpl::execution::make_device_policy(q_ct1),
                             offset, offset + t_delta_rows, offset,
