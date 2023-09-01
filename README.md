@@ -144,6 +144,17 @@ In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/ps
     ^
 3 errors generated.
 ```
+- If c2s gives an error like: 
+```shell
+/lib/clang/18/include/cuda_wrappers/cmath:27:15: fatal error: 'cmath' file not found
+   27 | #include_next <cmath>
+```
+It can be resolved by installing `libstdc++-12-dev`:
+```shell
+sudo apt install libstdc++-12-dev
+```
+
+
 - Example of converting a single CUDA file:
 ```shell
 c2s vectoradd.cu --gen-helper-function --out-root sycl_vector_add

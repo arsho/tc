@@ -63,7 +63,7 @@ struct KernelTimer {
 
     void start_timer() {
     dpct::device_ext &dev_ct1 = dpct::get_current_device();
-    sycl::queue &q_ct1 = dev_ct1.default_queue();
+    sycl::queue &q_ct1 = dev_ct1.in_order_queue();
         /*
         DPCT1012:5: Detected kernel execution time measurement pattern and
         generated an initial code for time measurements in SYCL. You can change
@@ -75,7 +75,7 @@ struct KernelTimer {
 
     void stop_timer() {
     dpct::device_ext &dev_ct1 = dpct::get_current_device();
-    sycl::queue &q_ct1 = dev_ct1.default_queue();
+    sycl::queue &q_ct1 = dev_ct1.in_order_queue();
         /*
         DPCT1012:6: Detected kernel execution time measurement pattern and
         generated an initial code for time measurements in SYCL. You can change
@@ -478,7 +478,7 @@ void gpu_tc(const char *data_path, char separator, long int relation_rows,
             int preferred_block_size, const char *dataset_name,
             int number_of_sm) {
     dpct::device_ext &dev_ct1 = dpct::get_current_device();
-    sycl::queue &q_ct1 = dev_ct1.default_queue();
+    sycl::queue &q_ct1 = dev_ct1.in_order_queue();
     int relation_columns = 2;
     std::chrono::high_resolution_clock::time_point time_point_begin;
     std::chrono::high_resolution_clock::time_point time_point_end;
@@ -646,7 +646,7 @@ void gpu_tc(const char *data_path, char separator, long int relation_rows,
         time_point_begin = chrono::high_resolution_clock::now();
         join_result_rows =
             std::reduce(oneapi::dpl::execution::make_device_policy(q_ct1),
-                         offset, offset + t_delta_rows, 0);
+                        offset, offset + t_delta_rows, 0);
         std::exclusive_scan(oneapi::dpl::execution::make_device_policy(q_ct1),
                             offset, offset + t_delta_rows, offset,
                             (decltype(offset)::value_type)0);

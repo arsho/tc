@@ -1,7 +1,7 @@
 [
     {
         "command": "nvcc -c  -o tc_cuda.out -D__CUDACC__=1 tc_cuda.cu",
-        "directory": "/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation",
-        "file": "/mnt/D82C06B72C0690A4/ShovonData/Codes/GithubCodes/sycltocuda/tc/sycl_implementation/tc_cuda.cu"
+        "directory": "/mnt/Study/PhD/GithubCodes/tc/sycl_implementation",
+        "file": "/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu"
     }
 ]
