@@ -87,10 +87,9 @@ tar -xvf tc_sycl.tgz
 cd tc_sycl
 icpx -fsycl *.cpp
 ```
-- In converted SYCL code, replace `std::reducet` to `std::reduce`
 Error:
 ```shell
-u107416@idc-beta-batch-pvc-node-03:~$ icpx -fsycl tc_cuda.dp.cpp 
+@idc-beta-batch-pvc-node-01:~$ icpx -fsycl tc_cuda.dp.cpp 
 tc_cuda.dp.cpp:652:30: error: 'decltype(offset)' (aka 'int *') is not a class, namespace, or enumeration
                             (decltype(offset)::value_type)0);
                              ^
@@ -143,6 +142,7 @@ In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/ps
     operator()(_Idx __idx, _Acc& __acc) const
     ^
 3 errors generated.
+
 ```
 - If c2s gives an error like: 
 ```shell
