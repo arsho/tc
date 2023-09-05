@@ -6,16 +6,30 @@ This repo contains the code, data, and instructions to compute transitive closur
 ```
 .
 ├── cuda_implementation
-│   ├── data_7035.txt: Sample dataset
+│   ├── data_7035.txt
 │   ├── error_handler.cu
 │   ├── kernels.cu
 │   ├── Makefile
-│   ├── tc_cuda.cu: Main file
+│   ├── tc_cuda.cu
 │   └── utils.cu
-├── gitignore.txt
+├── LICENSE
 ├── README.md
+├── scratch
+│   ├── hipc_2019_tc.txt
+│   ├── hipc_2019.txt
+│   ├── Makefile
+│   ├── tc.cpp
+│   └── vector_add.cpp
 └── sycl_implementation
-
+    ├── compile_commands.json
+    ├── data_7035.txt
+    ├── Makefile
+    ├── tc_cuda.cu
+    ├── tc_sycl
+    │   ├── data_7035.txt
+    │   ├── MainSourceFiles.yaml
+    │   └── tc_cuda.dp.cpp
+    └── tc_sycl.tgz
 ```
 
 
@@ -159,6 +173,14 @@ sudo apt install libstdc++-12-dev
 ```shell
 c2s vectoradd.cu --gen-helper-function --out-root sycl_vector_add
 ```
+
+### Scratch implementation
+- Copy the data and program files:
+```shell
+cd scracth
+scp -r * idc:~/scratch/
+```
+
 ## Citation
 We encourage you to cite our work if you have used our work. Use the following BibTeX citation:
 - BibTeX:
