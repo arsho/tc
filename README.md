@@ -30,6 +30,24 @@ This repo contains the code, data, and instructions to compute transitive closur
     │   ├── MainSourceFiles.yaml
     │   └── tc_cuda.dp.cpp
     └── tc_sycl.tgz
+
+.
+├── cuda_implementation
+│   ├── data_7035.txt
+│   ├── error_handler.cu
+│   ├── kernels.cu
+│   ├── Makefile
+│   ├── tc_cuda.cu
+│   └── utils.cu
+├── LICENSE
+├── README.md
+└── sycl_implementation
+    ├── data_7035.txt
+    ├── Makefile
+    ├── tc_cuda.cu
+    └── tc_sycl
+
+
 ```
 
 
@@ -87,7 +105,7 @@ cd sycl_implementation
 make clean
 intercept-build make
 c2s -p compile_commands.json --out-root tc_sycl
-cp data_7035.txt tc_sycl
+cp data_5.txt data_7035.txt tc_sycl
 tar -cvf tc_sycl.tgz tc_sycl
 scp tc_sycl.tgz idc:~/
 ```
@@ -158,6 +176,15 @@ In file included from /opt/intel/oneapi/dpl/2022.2.0/linux/include/oneapi/dpl/ps
 3 errors generated.
 
 ```
+- Resolved the above errors:
+```shell
+If we see the errors that are coming from onedpl headers (2 & 3) the error log leaves a hint that there is a slight miss match in the type of the object which you can just correct it by adding "**const**" like this `bool operator()(const Entity &lhs, const Entity &rhs) const` (line 107 in tc_cuda.dp.cpp file). 
+This will resolve your 2 errors from headers. 
+
+Regarding the error from decltype, it seems to be an issue with the tool migrated code which we will report it to concern team. For now you can remove (decltype(offset)::value_type) as shown and try compiling.
+
+std::exclusive_scan(oneapi::dpl::execution::make_device_policy(q_ct1), offset, offset + t_delta_rows, offset,0);
+```
 - If c2s gives an error like: 
 ```shell
 /lib/clang/18/include/cuda_wrappers/cmath:27:15: fatal error: 'cmath' file not found
@@ -179,6 +206,118 @@ c2s vectoradd.cu --gen-helper-function --out-root sycl_vector_add
 ```shell
 cd scracth
 scp -r * idc:~/scratch/
+scp tc.cpp idc:~/scratch/
+```
+- - In Intel dev cloud node:
+```shell
+ssh idc
+srun --pty bash
+source /opt/intel/oneapi/setvars.sh
+cd scratch
+icpx -fsycl tc.cpp -o tc
+./tc
+```
+
+### CUDA Output
+```shell
+nvcc tc_cuda.cu -o tc_cuda.out
+./tc_cuda.out
+Benchmark for OL.cedge_initial
+----------------------------------------------------------
+
+| Dataset | Number of rows | TC size | Iterations | Blocks x Threads | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| OL.cedge_initial | 7,035 | 146,120 | 64 | 320 x 512 | 0.0275 |
+
+
+Initialization: 0.0008, Read: 0.0012
+Hashtable rate: 528,470,545 keys/s, time: 0.0000
+Join: 0.0052
+Deduplication: 0.0084 (sort: 0.0043, unique: 0.0041)
+Memory clear: 0.0036
+Union: 0.0083 (merge: 0.0025)
+Total: 0.0275
+
+Benchmark for HIPC
+----------------------------------------------------------
+Entity name: Result
+===================================
+0 1
+0 2
+0 3
+0 4
+1 3
+1 4
+2 3
+2 4
+3 4
+Row counts 9
+
+
+
+| Dataset | Number of rows | TC size | Iterations | Blocks x Threads | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| HIPC | 5 | 9 | 3 | 320 x 512 | 0.0035 |
+
+
+Initialization: 0.0009, Read: 0.0002
+Hashtable rate: 548,245 keys/s, time: 0.0000
+Join: 0.0002
+Deduplication: 0.0002 (sort: 0.0001, unique: 0.0001)
+Memory clear: 0.0011
+Union: 0.0008 (merge: 0.0001)
+Total: 0.0035
+```
+
+### SYCL Output
+```shell
+u107416@idc-beta-batch-pvc-node-01:~$ icpx -fsycl tc_cuda.dp.cpp
+u107416@idc-beta-batch-pvc-node-01:~$ ./a.out
+Benchmark for OL.cedge_initial
+----------------------------------------------------------
+
+| Dataset | Number of rows | TC size | Iterations | Blocks x Threads | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| OL.cedge_initial | 7035 | 132395 | 67 | 14336 x 512 | 1.4665 |
+
+
+Initialization: 1.4084, Read: 0.0037
+Hashtable rate: 56545076 keys/s, time: 0.0001
+Join: 0.0139
+Deduplication: 0.0326 (sort: 0.0123, unique: 0.0203)
+Memory clear: 0.0004
+Union: 0.0073 (merge: 0.0054)
+Total: 1.4665
+
+Benchmark for HIPC
+----------------------------------------------------------
+Entity name: Result
+===================================
+0 1
+0 2
+0 3
+0 4
+1 3
+1 4
+2 3
+2 4
+3 4
+Row counts 9
+
+
+
+| Dataset | Number of rows | TC size | Iterations | Blocks x Threads | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| HIPC | 5 | 9 | 3 | 14336 x 512 | 0.0045 |
+
+
+Initialization: 0.0001, Read: 0.0029
+Hashtable rate: 99989 keys/s, time: 0.0001
+Join: 0.0005
+Deduplication: 0.0006 (sort: 0.0001, unique: 0.0006)
+Memory clear: 0.0000
+Union: 0.0002 (merge: 0.0000)
+Total: 0.0045
 ```
 
 ## Citation

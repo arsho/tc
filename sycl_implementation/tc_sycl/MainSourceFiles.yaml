@@ -1325,7 +1325,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          26634
+    Offset:          26733
     Length:          17
     ReplacementText: 'sycl::free(t_delta, q_ct1)'
     ConstantFlag:    ''
@@ -1334,7 +1334,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          26657
+    Offset:          26756
     Length:          16
     ReplacementText: 'sycl::free(result, q_ct1)'
     ConstantFlag:    ''
@@ -1343,7 +1343,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          26679
+    Offset:          26778
     Length:          20
     ReplacementText: 'sycl::free(hash_table, q_ct1)'
     ConstantFlag:    ''
@@ -1352,7 +1352,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          26705
+    Offset:          26804
     Length:          25
     ReplacementText: 'sycl::free(result_host, q_ct1)'
     ConstantFlag:    ''
@@ -1361,7 +1361,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          28799
+    Offset:          28898
     Length:          25
     ReplacementText: 'device_id = dpct::dev_mgr::instance().current_device_id()'
     ConstantFlag:    ''
@@ -1370,7 +1370,7 @@ Replacements:
     NewHostVarName:  ''
     BlockLevelFormatFlag: false
   - FilePath:        '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Offset:          28900
+    Offset:          28999
     Length:          80
     ReplacementText: 'number_of_sm = dpct::dev_mgr::instance().get_device(device_id).get_max_compute_units()'
     ConstantFlag:    ''
@@ -1380,7 +1380,7 @@ Replacements:
     BlockLevelFormatFlag: false
 MainSourceFilesDigest:
   - MainSourceFile:  '/mnt/Study/PhD/GithubCodes/tc/sycl_implementation/tc_cuda.cu'
-    Digest:          74d3a322c85b5c1f9fe9d841a14b4e53
+    Digest:          7ba5eb24c10c4d1705e298afbaf900ea
 DpctVersion:     18.0.0
 MainHelperFileName: ''
 USMLevel:        ''

@@ -681,6 +681,10 @@ void gpu_tc(const char *data_path, char separator,
     time_point_end = chrono::high_resolution_clock::now();
     spent_time = get_time_spent("", time_point_begin, time_point_end);
     output.union_time += spent_time;
+    if(relation_rows < 10) {
+        show_entity_array(result_host, result_rows, "Result");
+    }
+
     time_point_begin = chrono::high_resolution_clock::now();
     // Clear memory
     cudaFree(t_delta);
@@ -742,7 +746,8 @@ void run_benchmark(int grid_size, int block_size, double load_factor) {
 
     // Array of dataset names and paths, filename pattern: data_<number_of_rows>.txt
     string datasets[] = {
-            "OL.cedge_initial", "data_7035.txt"
+            "OL.cedge_initial", "data_7035.txt",
+            "HIPC", "data_5.txt",
     };
 
     // Iterate over the datasets array
