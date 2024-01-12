@@ -1,54 +1,5 @@
 ## Transitive Closure Computation
-This repo contains the code, data, and instructions to compute transitive closure in different parallel programming models.
-
-
-## Folder structure
-```
-.
-├── cuda_implementation
-│   ├── data_7035.txt
-│   ├── error_handler.cu
-│   ├── kernels.cu
-│   ├── Makefile
-│   ├── tc_cuda.cu
-│   └── utils.cu
-├── LICENSE
-├── README.md
-├── scratch
-│   ├── hipc_2019_tc.txt
-│   ├── hipc_2019.txt
-│   ├── Makefile
-│   ├── tc.cpp
-│   └── vector_add.cpp
-└── sycl_implementation
-    ├── compile_commands.json
-    ├── data_7035.txt
-    ├── Makefile
-    ├── tc_cuda.cu
-    ├── tc_sycl
-    │   ├── data_7035.txt
-    │   ├── MainSourceFiles.yaml
-    │   └── tc_cuda.dp.cpp
-    └── tc_sycl.tgz
-
-.
-├── cuda_implementation
-│   ├── data_7035.txt
-│   ├── error_handler.cu
-│   ├── kernels.cu
-│   ├── Makefile
-│   ├── tc_cuda.cu
-│   └── utils.cu
-├── LICENSE
-├── README.md
-└── sycl_implementation
-    ├── data_7035.txt
-    ├── Makefile
-    ├── tc_cuda.cu
-    └── tc_sycl
-
-
-```
+This repo contains the code, data, and instructions to compute transitive closure in CUDA, SYCL(ported using SYCLomatic), and SYCL from scratch.
 
 
 ## Dependencies
@@ -217,10 +168,7 @@ cd sycl_scratch_implementation
 icpx -fsycl tc.cpp -o tc
 ./tc
 ```
-- Using docker:
-```shell
 
-```
 ### Run scratch implementation using Docker in interactive mode
 #### Pull Docker image
 Pull Docker image for Intel oneAPI Basekit, which includes essential development tools. The process may take several minutes due to the image's size (around a few gigabytes).:
