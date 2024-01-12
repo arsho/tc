@@ -101,7 +101,7 @@ export PATH="/home/arsho/syclomatic/bin:$PATH"
 ```
 - In nvidia machine:
 ```shell
-cd sycl_implementation
+cd sycl_syclomatic_implementation
 make clean
 intercept-build make
 c2s -p compile_commands.json --out-root tc_sycl
@@ -201,22 +201,59 @@ sudo apt install libstdc++-12-dev
 c2s vectoradd.cu --gen-helper-function --out-root sycl_vector_add
 ```
 
-### Scratch implementation
+### SYCL Scratch implementation
 - Copy the data and program files:
 ```shell
-cd scracth
-scp -r * idc:~/scratch/
-scp tc.cpp idc:~/scratch/
+cd sycl_scratch_implementation
+scp -r * idc:~/sycl_scratch_implementation/
+scp tc.cpp idc:~/sycl_scratch_implementation/
 ```
-- - In Intel dev cloud node:
+- In Intel dev cloud node:
 ```shell
 ssh idc
 srun --pty bash
 source /opt/intel/oneapi/setvars.sh
-cd scratch
+cd sycl_scratch_implementation
 icpx -fsycl tc.cpp -o tc
 ./tc
 ```
+- Using docker:
+```shell
+
+```
+### Run scratch implementation using Docker in interactive mode
+#### Pull Docker image
+Pull Docker image for Intel oneAPI Basekit, which includes essential development tools. The process may take several minutes due to the image's size (around a few gigabytes).:
+```shell
+docker pull intel/oneapi-basekit:devel-ubuntu22.04
+```
+#### Mount the current directory to docker run
+Mount the current directory into the Docker container to execute the SYCL program.
+The following command runs a container named `inteldpc` based on the `intel/oneapi-basekit:devel-ubuntu22.04` image, mounting the current local directory to the `/sycl_demo` directory inside the container in interactive mode.
+```shell
+cd sycl_scratch_implementation
+docker run -v $(pwd):/sycl_tc -it --name=inteldpc intel/oneapi-basekit:devel-ubuntu22.04
+```
+Then follow the above steps again to compile and run SYCL program in docker interactive mode.
+
+#### Compile and execute SYCL program using Makefile
+- Navigate to the mounted directory within the Docker container:
+```shell
+root@5d3cac1a5b20:/# cd sycl_tc
+```
+- Compile and run the program `tc.cpp` using `make` command:
+```shell
+root@5d3cac1a5b20:/sycl_tc# make run_tc
+./tc
+Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
+Iteration 1: old result_row_size = 7035, join_result_row_size = 7445, projection_row_size = 7331, deduplicated_result_row_size = 14319, 
+...
+```
+- If you exit the docker interactive mode and wants to turn on the interactive mode again you need to delete the container first:
+```shell
+docker rm inteldpc
+```
+
 
 ### CUDA Output
 ```shell
@@ -269,7 +306,7 @@ Union: 0.0008 (merge: 0.0001)
 Total: 0.0035
 ```
 
-### SYCL Output
+### SYCL SYCLomatic Output
 ```shell
 u107416@idc-beta-batch-pvc-node-01:~$ icpx -fsycl tc_cuda.dp.cpp
 u107416@idc-beta-batch-pvc-node-01:~$ ./a.out
