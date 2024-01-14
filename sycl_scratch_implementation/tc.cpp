@@ -3,8 +3,27 @@
 #include <oneapi/dpl/execution>
 #include <oneapi/dpl/algorithm>
 #include <functional>
-
+#include <chrono>
+#include <iomanip>
 using namespace sycl;
+
+struct Output {
+    long int input_rows;
+    long int hashtable_rows;
+    double load_factor;
+    double initialization_time;
+    double memory_clear_time;
+    double read_time;
+    double reverse_time;
+    double hashtable_build_time;
+    long int hashtable_build_rate;
+    double join_time;
+    double projection_time;
+    double deduplication_time;
+    double union_time;
+    double total_time;
+    const char *dataset_name;
+} output;
 
 struct Entity {
     int key;
@@ -34,6 +53,16 @@ struct is_equal {
         return false;
     }
 };
+
+double get_time_spent(std::string message,
+                      std::chrono::high_resolution_clock::time_point time_point_begin,
+                      std::chrono::high_resolution_clock::time_point time_point_end) {
+    std::chrono::duration<double> time_span = time_point_end - time_point_begin;
+    if (message != "")
+        std::cout << message << ": " << time_span.count() << " seconds" << std::endl;
+    return time_span.count();
+}
+
 
 long int get_row_size(const char *data_path) {
     std::ifstream data_file;
@@ -174,6 +203,9 @@ void get_join_result(queue &q,
 
 void compute_tc(queue &q, const char *data_path, char separator,
                 long int relation_row_size, const char *dataset_name) {
+    std::chrono::high_resolution_clock::time_point time_point_begin;
+    std::chrono::high_resolution_clock::time_point time_point_end;
+    time_point_begin = std::chrono::high_resolution_clock::now();
     double load_factor = 0.4;
     long int hash_table_row_size = (long int) relation_row_size / load_factor;
     hash_table_row_size = pow(2, ceil(log(hash_table_row_size) / log(2)));
@@ -197,17 +229,14 @@ void compute_tc(queue &q, const char *data_path, char separator,
     initialize_t_delta_result_array(q, relation_row_size, relation, t_delta, result);
 
     build_hash_table(q, hash_table, hash_table_row_size, relation, relation_row_size);
-//    show_entity_array(t_delta, t_delta_row_size, "Initial t_delta", 0);
-//    show_entity_array(hash_table, hash_table_row_size, "Hashtable", 0);
 
     oneapi::dpl::stable_sort(oneapi::dpl::execution::make_device_policy(q),
                              result, result + result_row_size, cmp());
-//    show_entity_array(result, result_row_size, "Initial Result", 0);
 
-    int iteration = 0;
+    int iterations = 0;
     // Iterations until no new tuple is found
     while (true) {
-        iteration++;
+        iterations++;
         // Get the projected join result in 2 pass
         // First pass is to create the offset array for each row of the t_delta as GPU cannot do dynamic allocation
         // Second pass is to insert projected join result
@@ -225,12 +254,11 @@ void compute_tc(queue &q, const char *data_path, char separator,
                         join_result_offset, join_result);
         // Deduplication of projected join result
         // Sort and then remove consecutive duplicate Entity
-        oneapi::dpl::stable_sort(oneapi::dpl::execution::make_device_policy(q),
-                                 join_result, join_result + join_result_row_size, cmp());
-
-        long int projection_row_size = (std::unique(oneapi::dpl::execution::make_device_policy(q),
-                                                    join_result, join_result + join_result_row_size,
-                                                    is_equal())) - join_result;
+        std::sort(join_result, join_result + join_result_row_size, cmp());
+        // Unique operation
+        auto unique_end = std::unique(oneapi::dpl::execution::make_device_policy(q),
+                                      join_result, join_result + join_result_row_size, is_equal());
+        long int projection_row_size = std::distance(join_result, unique_end);
         // Update the t_delta for next iteration
         free(t_delta, q);
         t_delta = malloc_shared<Entity>(projection_row_size, q);
@@ -258,35 +286,39 @@ void compute_tc(queue &q, const char *data_path, char separator,
         free(join_result, q);
         free(join_result_offset, q);
         free(concatenated_result, q);
-        std::cout << "Iteration " << iteration << ": "
-                                << "old result_row_size = " << result_row_size << ", "
-                                << "join_result_row_size = " << join_result_row_size << ", "
-                  << "projection_row_size = " << projection_row_size << ", "
-                  //              << "concatenated_row_size = " << concatenated_row_size << ", "
-                  << "deduplicated_result_row_size = " << deduplicated_result_row_size << ", "
-                  << std::endl;
+//        std::cout << "Iteration " << iterations << ": "
+//                                << "join_result = " << join_result_row_size << ", "
+//                  << "projection = " << projection_row_size << ", "
+//                  //              << "concatenated_row_size = " << concatenated_row_size << ", "
+//                  << "deduplicated_result = " << deduplicated_result_row_size << ", "
+//                  << std::endl;
         if (result_row_size == deduplicated_result_row_size) {
             break;
         }
         result_row_size = deduplicated_result_row_size;
     }
-
-
-
-    //    show_entity_array(result, result_row_size, "Result", 0);
-//    show_entity_array(relation, relation_row_size, "relation", 0);
-
-    std::cout << "Dataset: " << dataset_name << ", TC size: " << result_row_size << ", Iterations: " << iteration
-              << std::endl;
-
     free(relation, q);
     free(result, q);
     free(t_delta, q);
     free(hash_table, q);
+    time_point_end = std::chrono::high_resolution_clock::now();
+    double calculated_time = get_time_spent("", time_point_begin, time_point_end);;
+    std::cout << std::endl;
+    std::cout << "| Dataset | Number of rows | TC size | Iterations | Time (s) |" << std::endl;
+    std::cout << "| --- | --- | --- | --- | --- | --- |" << std::endl;
+    std::cout << "| " << dataset_name << " | " << relation_row_size << " | " << result_row_size;
+    std::cout << std::fixed << " | " << iterations << " | ";
+    std::cout << std::fixed << calculated_time << " |\n" << std::endl;
+
 }
 
 
 int main() {
+    // Set locale for printing numbers with commas as thousands separator
+    std::locale loc("");
+    std::cout.imbue(loc);
+    std::cout << std::fixed;
+    std::cout << std::setprecision(4);
     queue q;
     std::cout << "Running on device: "
               << q.get_device().get_info<info::device::name>()
@@ -298,6 +330,7 @@ int main() {
     // Array of dataset names and paths, filename pattern: data_<number_of_rows>.txt
     std::string datasets[] = {
             "OL.cedge", "data/data_7035.txt",
+            "SF.cedge", "data/data_223001.txt"
 //            "data_4", "data/data_4.txt",
 //            "data_5", "data/data_51.txt",
 //            "data_5", "data/data_5.txt",

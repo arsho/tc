@@ -191,11 +191,20 @@ root@5d3cac1a5b20:/# cd sycl_tc
 ```
 - Compile and run the program `tc.cpp` using `make` command:
 ```shell
-root@5d3cac1a5b20:/sycl_tc# make run_tc
+root@58b4c9141cc8:/sycl_tc# make run_tc
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
 ./tc
 Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
-Iteration 1: old result_row_size = 7035, join_result_row_size = 7445, projection_row_size = 7331, deduplicated_result_row_size = 14319, 
-...
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| OL.cedge | 7035 | 146120 | 64 | 6.0322 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| SF.cedge | 223001 | 80498014 | 287 | 802.4114 |
+
 ```
 - If you exit the docker interactive mode and wants to turn on the interactive mode again you need to delete the container first:
 ```shell

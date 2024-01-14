@@ -1,5 +1,5 @@
 CXX = icpx
-CXXFLAGS = -fsycl -std=c++17 -w
+CXXFLAGS = -fsycl -std=c++20 -w
 #CXXFLAGS = -fsycl -fsycl-targets=nvptx64-nvidia-cuda --cuda-gpu-arch=sm_89 -fdenormal-fp-math=ieee
 SRCS := $(wildcard *.cpp)
 PRGS := $(patsubst %.cpp,%,$(SRCS))

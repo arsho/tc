@@ -2,6 +2,94 @@
 - The final TC count and number of iterations are random. The first iteration has identical result to CUDA.
 ```shell
 root@58b4c9141cc8:/sycl_tc# make run_tc
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
+./tc
+Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
+Iteration 1: join_result = 7445, projection = 7331, deduplicated_result = 14319, 
+Iteration 2: join_result = 7784, projection = 7628, deduplicated_result = 21813, 
+Iteration 3: join_result = 8049, projection = 7848, deduplicated_result = 29352, 
+Iteration 4: join_result = 8248, projection = 8017, deduplicated_result = 36851, 
+Iteration 5: join_result = 8390, projection = 8134, deduplicated_result = 44235, 
+Iteration 6: join_result = 8489, projection = 8214, deduplicated_result = 51441, 
+Iteration 7: join_result = 8552, projection = 8263, deduplicated_result = 58424, 
+Iteration 8: join_result = 8610, projection = 8293, deduplicated_result = 65147, 
+Iteration 9: join_result = 8681, projection = 8321, deduplicated_result = 71596, 
+Iteration 10: join_result = 8716, projection = 8317, deduplicated_result = 77694, 
+Iteration 11: join_result = 8783, projection = 8357, deduplicated_result = 83457, 
+Iteration 12: join_result = 8885, projection = 8415, deduplicated_result = 88894, 
+Iteration 13: join_result = 8985, projection = 8448, deduplicated_result = 93984, 
+Iteration 14: join_result = 9073, projection = 8467, deduplicated_result = 98738, 
+Iteration 15: join_result = 9125, projection = 8463, deduplicated_result = 103161, 
+Iteration 16: join_result = 9158, projection = 8424, deduplicated_result = 107252, 
+Iteration 17: join_result = 9139, projection = 8352, deduplicated_result = 111015, 
+Iteration 18: join_result = 9076, projection = 8248, deduplicated_result = 114460, 
+Iteration 19: join_result = 9006, projection = 8133, deduplicated_result = 117619, 
+Iteration 20: join_result = 8889, projection = 7979, deduplicated_result = 120475, 
+Iteration 21: join_result = 8692, projection = 7754, deduplicated_result = 123011, 
+Iteration 22: join_result = 8494, projection = 7541, deduplicated_result = 125308, 
+Iteration 23: join_result = 8273, projection = 7341, deduplicated_result = 127436, 
+Iteration 24: join_result = 8045, projection = 7127, deduplicated_result = 129399, 
+Iteration 25: join_result = 7776, projection = 6877, deduplicated_result = 131199, 
+Iteration 26: join_result = 7468, projection = 6591, deduplicated_result = 132828, 
+Iteration 27: join_result = 7103, projection = 6259, deduplicated_result = 134275, 
+Iteration 28: join_result = 6697, projection = 5883, deduplicated_result = 135536, 
+Iteration 29: join_result = 6234, projection = 5469, deduplicated_result = 136633, 
+Iteration 30: join_result = 5754, projection = 5038, deduplicated_result = 137589, 
+Iteration 31: join_result = 5263, projection = 4611, deduplicated_result = 138429, 
+Iteration 32: join_result = 4777, projection = 4192, deduplicated_result = 139178, 
+Iteration 33: join_result = 4302, projection = 3797, deduplicated_result = 139847, 
+Iteration 34: join_result = 3864, projection = 3427, deduplicated_result = 140452, 
+Iteration 35: join_result = 3444, projection = 3071, deduplicated_result = 140995, 
+Iteration 36: join_result = 3036, projection = 2726, deduplicated_result = 141481, 
+Iteration 37: join_result = 2669, projection = 2414, deduplicated_result = 141924, 
+Iteration 38: join_result = 2344, projection = 2134, deduplicated_result = 142327, 
+Iteration 39: join_result = 2062, projection = 1887, deduplicated_result = 142694, 
+Iteration 40: join_result = 1806, projection = 1665, deduplicated_result = 143034, 
+Iteration 41: join_result = 1576, projection = 1467, deduplicated_result = 143360, 
+Iteration 42: join_result = 1364, projection = 1280, deduplicated_result = 143675, 
+Iteration 43: join_result = 1174, projection = 1109, deduplicated_result = 143976, 
+Iteration 44: join_result = 1010, projection = 960, deduplicated_result = 144264, 
+Iteration 45: join_result = 866, projection = 824, deduplicated_result = 144532, 
+Iteration 46: join_result = 744, projection = 709, deduplicated_result = 144779, 
+Iteration 47: join_result = 638, projection = 608, deduplicated_result = 145002, 
+Iteration 48: join_result = 548, projection = 523, deduplicated_result = 145198, 
+Iteration 49: join_result = 462, projection = 445, deduplicated_result = 145369, 
+Iteration 50: join_result = 393, projection = 379, deduplicated_result = 145518, 
+Iteration 51: join_result = 332, projection = 322, deduplicated_result = 145645, 
+Iteration 52: join_result = 281, projection = 272, deduplicated_result = 145755, 
+Iteration 53: join_result = 235, projection = 227, deduplicated_result = 145847, 
+Iteration 54: join_result = 197, projection = 190, deduplicated_result = 145922, 
+Iteration 55: join_result = 162, projection = 158, deduplicated_result = 145980, 
+Iteration 56: join_result = 133, projection = 130, deduplicated_result = 146024, 
+Iteration 57: join_result = 107, projection = 105, deduplicated_result = 146057, 
+Iteration 58: join_result = 83, projection = 81, deduplicated_result = 146082, 
+Iteration 59: join_result = 63, projection = 61, deduplicated_result = 146098, 
+Iteration 60: join_result = 44, projection = 44, deduplicated_result = 146109, 
+Iteration 61: join_result = 34, projection = 34, deduplicated_result = 146116, 
+Iteration 62: join_result = 24, projection = 24, deduplicated_result = 146119, 
+Iteration 63: join_result = 17, projection = 17, deduplicated_result = 146120, 
+Iteration 64: join_result = 12, projection = 12, deduplicated_result = 146120, 
+Dataset: OL.cedge, TC size: 146120, Iterations: 64
+root@58b4c9141cc8:/sycl_tc# make run_tc
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
+tc.cpp:233:40: error: no matching function for call to 'distance'
+        long int projection_row_size = std::distance(oneapi::dpl::execution::make_device_policy(q),
+                                       ^~~~~~~~~~~~~
+/usr/lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/stl_iterator_base_funcs.h:138:5: note: candidate function template not viable: requires 2 arguments, but 3 were provided
+    distance(_InputIterator __first, _InputIterator __last)
+    ^
+1 error generated.
+make: *** [Makefile:16: tc] Error 1
+root@58b4c9141cc8:/sycl_tc# make run_tc
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
+./tc
+
+
+
+
+
+
+root@58b4c9141cc8:/sycl_tc# make run_tc
 ./tc
 Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
 Iteration 1: old result_row_size = 7035, join_result_row_size = 7445, projection_row_size = 7331, deduplicated_result_row_size = 14319, 
