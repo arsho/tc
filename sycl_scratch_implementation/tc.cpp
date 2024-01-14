@@ -209,7 +209,6 @@ void compute_tc(queue &q, const char *data_path, char separator,
     double load_factor = 0.4;
     long int hash_table_row_size = (long int) relation_row_size / load_factor;
     hash_table_row_size = pow(2, ceil(log(hash_table_row_size) / log(2)));
-
     Entity negative_entity;
     negative_entity.key = -1;
     negative_entity.value = -1;
@@ -230,8 +229,7 @@ void compute_tc(queue &q, const char *data_path, char separator,
 
     build_hash_table(q, hash_table, hash_table_row_size, relation, relation_row_size);
 
-    oneapi::dpl::stable_sort(oneapi::dpl::execution::make_device_policy(q),
-                             result, result + result_row_size, cmp());
+    std::stable_sort(result, result + result_row_size, cmp());
 
     int iterations = 0;
     // Iterations until no new tuple is found
@@ -254,11 +252,13 @@ void compute_tc(queue &q, const char *data_path, char separator,
                         join_result_offset, join_result);
         // Deduplication of projected join result
         // Sort and then remove consecutive duplicate Entity
-        std::sort(join_result, join_result + join_result_row_size, cmp());
+        std::stable_sort(join_result, join_result + join_result_row_size, cmp());
         // Unique operation
-        auto unique_end = std::unique(oneapi::dpl::execution::make_device_policy(q),
-                                      join_result, join_result + join_result_row_size, is_equal());
-        long int projection_row_size = std::distance(join_result, unique_end);
+        long int projection_row_size =
+                (std::unique(oneapi::dpl::execution::make_device_policy(q),
+                             join_result,
+                             join_result + join_result_row_size, is_equal())) -
+                        join_result;
         // Update the t_delta for next iteration
         free(t_delta, q);
         t_delta = malloc_shared<Entity>(projection_row_size, q);

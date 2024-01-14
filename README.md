@@ -198,12 +198,12 @@ Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
 
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
-| OL.cedge | 7035 | 146120 | 64 | 6.0322 |
+| OL.cedge | 7035 | 146120 | 64 | 3.4112 |
 
 
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
-| SF.cedge | 223001 | 80498014 | 287 | 802.4114 |
+| SF.cedge | 223001 | 80498014 | 287 | 733.0985 |
 
 ```
 - If you exit the docker interactive mode and wants to turn on the interactive mode again you need to delete the container first:
