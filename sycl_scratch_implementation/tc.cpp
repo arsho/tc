@@ -5,6 +5,7 @@
 #include <functional>
 #include <chrono>
 #include <iomanip>
+
 using namespace sycl;
 
 struct Output {
@@ -240,6 +241,12 @@ void compute_tc(queue &q, const char *data_path, char separator,
         // Second pass is to insert projected join result
         int *join_result_offset = malloc_shared<int>(t_delta_row_size, q);
         get_join_result_offset(q, hash_table, hash_table_row_size, t_delta, t_delta_row_size, join_result_offset);
+//        long int join_result_row_size = oneapi::dpl::reduce(oneapi::dpl::execution::make_device_policy(q),
+//                                                            join_result_offset, join_result_offset + t_delta_row_size,
+//                                                            0);
+//        oneapi::dpl::exclusive_scan(oneapi::dpl::execution::make_device_policy(q),
+//                                    join_result_offset, join_result_offset + t_delta_row_size, join_result_offset, 0);
+
         long int start_index = 0;
         for (long int i = 0; i < t_delta_row_size; i++) {
             long int temp = join_result_offset[i];
@@ -247,6 +254,7 @@ void compute_tc(queue &q, const char *data_path, char separator,
             start_index += temp;
         }
         long int join_result_row_size = start_index;
+
         Entity *join_result = malloc_shared<Entity>(join_result_row_size, q);
         get_join_result(q, hash_table, hash_table_row_size, t_delta, t_delta_row_size,
                         join_result_offset, join_result);
@@ -258,7 +266,7 @@ void compute_tc(queue &q, const char *data_path, char separator,
                 (std::unique(oneapi::dpl::execution::make_device_policy(q),
                              join_result,
                              join_result + join_result_row_size, is_equal())) -
-                        join_result;
+                join_result;
         // Update the t_delta for next iteration
         free(t_delta, q);
         t_delta = malloc_shared<Entity>(projection_row_size, q);
@@ -330,7 +338,23 @@ int main() {
     // Array of dataset names and paths, filename pattern: data_<number_of_rows>.txt
     std::string datasets[] = {
             "OL.cedge", "data/data_7035.txt",
-            "SF.cedge", "data/data_223001.txt"
+            "SF.cedge", "data/data_223001.txt",
+            "ego-Facebook", "data/data_88234.txt",
+            "wiki-Vote", "data/data_103689.txt",
+//            "p2p-Gnutella09", "data/data_26013.txt",
+//            "p2p-Gnutella04", "data/data_39994.txt",
+            "cal.cedge", "data/data_21693.txt",
+            "TG.cedge", "data/data_23874.txt",
+            "luxembourg_osm", "data/data_119666.txt",
+//            "fe_sphere", "data/data_49152.txt",
+//            "fe_body", "data/data_163734.txt",
+            "cti", "data/data_48232.txt",
+//            "fe_ocean", "data/data_409593.txt",
+            "wing", "data/data_121544.txt",
+//            "loc-Brightkite", "data/data_214078.txt",
+            "delaunay_n16", "data/data_196575.txt",
+//            "usroads", "data/data_165435.txt",
+//            "SF.cedge", "data/data_223001.txt"
 //            "data_4", "data/data_4.txt",
 //            "data_5", "data/data_51.txt",
 //            "data_5", "data/data_5.txt",

@@ -198,12 +198,52 @@ Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
 
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
-| OL.cedge | 7035 | 146120 | 64 | 3.4112 |
+| OL.cedge | 7035 | 146120 | 64 | 2.9040 |
 
 
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
-| SF.cedge | 223001 | 80498014 | 287 | 733.0985 |
+| SF.cedge | 223001 | 5589710 | 221 | 687.0579 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| ego-Facebook | 88234 | 2508102 | 17 | 61.2610 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wiki-Vote | 103689 | 11947132 | 10 | 207.4942 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cal.cedge | 21693 | 501755 | 195 | 1.6239 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| TG.cedge | 23874 | 481121 | 58 | 0.7556 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| luxembourg_osm | 119666 | 5022084 | 426 | 21.0762 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cti | 48232 | 6859653 | 53 | 5.2217 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wing | 121544 | 329438 | 11 | 0.1548 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| delaunay_n16 | 196575 | 6137959 | 101 | 31.2171 |
 
 ```
 - If you exit the docker interactive mode and wants to turn on the interactive mode again you need to delete the container first:
