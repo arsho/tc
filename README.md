@@ -301,7 +301,62 @@ Running on device: Intel(R) Data Center GPU Max 1550
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
 | delaunay_n16 | 196575 | 6137959 | 101 | 15.0196 |
+```
 
+- Devcloud output using onedpl exclusive scan:
+```
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
+./tc
+Running on device: Intel(R) Data Center GPU Max 1550
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| OL.cedge | 7035 | 146120 | 64 | 0.4755 |
+
+### incorrect tc size and iterations  
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| SF.cedge | 223001 | 25200839 | 543 | 460.9853 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| ego-Facebook | 88234 | 2508102 | 17 | 41.5998 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wiki-Vote | 103689 | 11947132 | 10 | 136.1453 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cal.cedge | 21693 | 501755 | 195 | 0.8812 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| TG.cedge | 23874 | 481121 | 58 | 0.3552 |
+
+### incorrect tc size
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| luxembourg_osm | 119666 | 5002270 | 426 | 8.7224 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cti | 48232 | 6859653 | 53 | 2.2845 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wing | 121544 | 329438 | 11 | 0.0763 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| delaunay_n16 | 196575 | 375960 | 297 | 17.4923 |
 
 ```
 
