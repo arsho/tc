@@ -246,6 +246,65 @@ Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
 | delaunay_n16 | 196575 | 6137959 | 101 | 31.2171 |
 
 ```
+- Dev cloud output with using dpl exclusve scan:
+```
+devcloud@a4bf01943fb5:~/tc/sycl_scratch_implementation$ make run_tc
+icpx -fsycl -std=c++20 -w -o tc tc.cpp
+./tc
+Running on device: Intel(R) Data Center GPU Max 1550
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| OL.cedge | 7035 | 146120 | 64 | 1.5024 |
+
+    
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| SF.cedge | 223001 | 66221432 | 543 | 494.9023 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| ego-Facebook | 88234 | 2508102 | 17 | 41.5011 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wiki-Vote | 103689 | 11947132 | 10 | 136.2747 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cal.cedge | 21693 | 501755 | 195 | 0.8577 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| TG.cedge | 23874 | 481121 | 58 | 0.3538 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| luxembourg_osm | 119666 | 5014917 | 426 | 8.7801 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| cti | 48232 | 6859653 | 53 | 2.3456 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| wing | 121544 | 329438 | 11 | 0.0759 |
+
+
+| Dataset | Number of rows | TC size | Iterations | Time (s) |
+| --- | --- | --- | --- | --- | --- |
+| delaunay_n16 | 196575 | 6137959 | 101 | 15.0196 |
+
+
+```
+
 - If you exit the docker interactive mode and wants to turn on the interactive mode again you need to delete the container first:
 ```shell
 docker rm inteldpc
