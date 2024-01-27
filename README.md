@@ -200,7 +200,7 @@ Running on device: 13th Gen Intel(R) Core(TM) i9-13900H
 | --- | --- | --- | --- | --- | --- |
 | OL.cedge | 7035 | 146120 | 64 | 2.9040 |
 
-
+### incorrect tc size and iterations
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
 | SF.cedge | 223001 | 5589710 | 221 | 687.0579 |
@@ -257,7 +257,7 @@ Running on device: Intel(R) Data Center GPU Max 1550
 | --- | --- | --- | --- | --- | --- |
 | OL.cedge | 7035 | 146120 | 64 | 1.5024 |
 
-    
+### incorrect tc size and iterations    
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
 | SF.cedge | 223001 | 66221432 | 543 | 494.9023 |
@@ -282,7 +282,7 @@ Running on device: Intel(R) Data Center GPU Max 1550
 | --- | --- | --- | --- | --- | --- |
 | TG.cedge | 23874 | 481121 | 58 | 0.3538 |
 
-
+### incorrect tc size
 | Dataset | Number of rows | TC size | Iterations | Time (s) |
 | --- | --- | --- | --- | --- | --- |
 | luxembourg_osm | 119666 | 5014917 | 426 | 8.7801 |
